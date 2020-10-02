@@ -4,9 +4,9 @@ Applications are expected to make use of xdg-desktop-portals in order communicat
 
 This fix has various assumptions:
 * The snap is not using the Gnome 3 extensions. It explicitly will fail in this scenario. Consider using Snapcraft Desktop Helpers in GTK2 mode which Java supports fine.
-* GVFS is added as a stage package and added to LD_LIBRARY_PATH; the desktop helpers do not do this automatically.
-* The library is added to LD_PRELOAD, the desktop helpers do not do this automatically. The library can be found at $SNAP/lib/g_app_info_launch_default_for_uri.so
+* The library is added to LD_PRELOAD, the desktop helpers do not do this automatically. The library can be found at $SNAP/usr/lib/g_app_info_launch_default_for_uri.so
 * The OS has xdg-desktop-portal support
+* The desktop interface is connected
 * The was tested on an Ubuntu 20.04 host, running a core18 snap with Java 11, with GTK2 Snapcraft Desktop Helpers as a template.
 
 Note that without the LD_PRELOAD set, adding GVFS to the library search path is enough to get http/https URI's working. However file URI's won't work without LD_PRELOAD configured.
@@ -28,5 +28,4 @@ parts:
       
 environment:
   LD_PRELOAD: ${SNAP}/usr/lib/g_app_info_launch_default_for_uri.so
-  LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}:${SNAP}/usr/lib/
 ```
