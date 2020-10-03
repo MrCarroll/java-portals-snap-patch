@@ -8,7 +8,7 @@ $(TARGET): $(TARGET).c
 	$(CC) $(CFLAGS) -o $(TARGET).so $(TARGET).c
 	
 clean:
-	$(RM) $(TARGET)
+	$(RM) $(TARGET).so
 
 install: $(TARGET)
 	install -D -m644 $(TARGET).so "$(DESTDIR)"/usr/lib/$(TARGET).so
